@@ -50,6 +50,9 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
     'drf_yasg',
     'django_filters',
+
+    # Internal apps
+    'monitors',
 ]
 
 REST_FRAMEWORK = {
