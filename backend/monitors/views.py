@@ -1,3 +1,11 @@
-from django.shortcuts import render
+from rest_framework import generics
 
-# Create your views here.
+from .serializers import MonitorSerializer
+
+
+class MonitorListView(generics.ListCreateAPIView):
+    serializer_class = MonitorSerializer
+
+
+class MonitorView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = MonitorSerializer
