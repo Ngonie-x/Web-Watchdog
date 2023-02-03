@@ -24,9 +24,9 @@ schema_view = get_schema_view(
     openapi.Info(
         title="Pay genius API",
         default_version="v1",
-        description="An api to generate salary surveys",
+        description="An api to monitor up time",
         terms_of_service="https://www.google.com/policies/terms/",
-        contact=openapi.Contact(email="ngonidzashe@ipcconsultants.com"),
+        contact=openapi.Contact(email="ngonidzashedelight@gmail.com"),
         license=openapi.License(name="BSD License"),
     ),
     public=True,
@@ -36,9 +36,19 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('monitors/', include('monitors.urls')),
 
     # Authentication
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/v1/dj-rest-auth/', include('dj_rest_auth.urls')),
+
+    path(
+        'api/v1/dj-rest-auth/registration/',
+        include('dj_rest_auth.registration.urls')
+    ),
+
+
     path('api/token/', jwt_views.TokenObtainPairView.as_view(),
          name='token_obtain_pair'),
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(),
