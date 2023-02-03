@@ -1,5 +1,6 @@
 import os
 import socket
+import ssl
 
 
 def check_port(host: str, port: str) -> bool:
@@ -35,3 +36,14 @@ def port_check(targets: list):
                 print(f"Port {port} on {host} is closed")
         else:
             print(f"{host} is down")
+
+
+def check_ssl_certificate(host, port):
+    context = ssl.create_default_context()
+    try:
+        with socket.create_connection((host, port)) as sock:
+            with context.wrap_socket(sock, server_hostname=host) as ssock:
+                certificate = ssock.getpeercert()
+                return certificate
+    except:
+        return False
